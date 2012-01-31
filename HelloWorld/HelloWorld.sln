@@ -30,6 +30,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldClient", "HelloWo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostCmdLineApp", "HostCmdLineApp\HostCmdLineApp.csproj", "{5AFB5F25-01FD-4E20-AB71-201304DFD33C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HostIIS", "HostIIS", "{3A135D35-162A-491E-84FF-A3F17077E182}"
+	ProjectSection(SolutionItems) = preProject
+		HostIIS\HelloWorldService.svc = HostIIS\HelloWorldService.svc
+		HostIIS\web.config = HostIIS\web.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bin", "bin", "{33A2AF85-B260-4868-9595-347EF0FC8080}"
+	ProjectSection(SolutionItems) = preProject
+		HostIIS\bin\HelloWorldService.dll = HostIIS\bin\HelloWorldService.dll
+		HostIIS\bin\HelloWorldService.pdb = HostIIS\bin\HelloWorldService.pdb
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,5 +95,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33A2AF85-B260-4868-9595-347EF0FC8080} = {3A135D35-162A-491E-84FF-A3F17077E182}
 	EndGlobalSection
 EndGlobal
