@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipCodeService", "ZipCodeService\ZipCodeService.csproj", "{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipCodeClient", "ZipCodeClient\ZipCodeClient.csproj", "{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}"
+	ProjectSection(ProjectDependencies) = postProject
+		{752F9FA6-71EF-480A-9222-96326CCC0225} = {752F9FA6-71EF-480A-9222-96326CCC0225}
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ZipCodeHost", "ZipCodeHost\", "{752F9FA6-71EF-480A-9222-96326CCC0225}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}|ZipCodeService.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/ZipCodeHost"
+		Debug.AspNetCompiler.PhysicalPath = "ZipCodeHost\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ZipCodeHost\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ZipCodeHost"
+		Release.AspNetCompiler.PhysicalPath = "ZipCodeHost\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ZipCodeHost\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "8080"
+		VWDDynamicPort = "false"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9FB0BBA1-0964-40FC-8BD0-2B1615776E9B}.Release|x86.ActiveCfg = Release|Any CPU
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Debug|x86.ActiveCfg = Debug|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Debug|x86.Build.0 = Debug|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Release|Any CPU.ActiveCfg = Release|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Release|x86.ActiveCfg = Release|x86
+		{8AD99F92-ACC8-421A-8830-9C0B2CB40C06}.Release|x86.Build.0 = Release|x86
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{752F9FA6-71EF-480A-9222-96326CCC0225}.Release|x86.ActiveCfg = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
