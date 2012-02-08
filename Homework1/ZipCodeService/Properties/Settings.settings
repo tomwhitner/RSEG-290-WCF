@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ZipCodeService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LOGFILE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/log.txt</Value>
+    </Setting>
+    <Setting Name="USERFILE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/users.txt</Value>
+    </Setting>
+    <Setting Name="ZIPCODEFILE" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">~/zipcodes.txt</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
