@@ -11,6 +11,15 @@ namespace HelloWorldClient
         {
             var client = new HelloWorldServiceClient();
             Console.WriteLine(client.GetMessage("Tom Whitner"));
+
+            try
+            {
+                
+
+            } finally
+            {
+                return;
+            }
         }
     }
 }
