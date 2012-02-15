@@ -1,5 +1,6 @@
 ﻿using MyWCFServices.RealNorthwindEntities;
 using RealNorthwindLogic;
+using System;
 
 namespace MyWCFServices.RealNorthwindService
 {
@@ -12,40 +13,46 @@ namespace MyWCFServices.RealNorthwindService
         public Product GetProduct(int id)
         {
             var productEntity = _productLogic.GetProduct(id);
-            var product = new Product();
-            TranslateProductEntityToProductContractData(productEntity, product);
-            return product;
+            if (productEntity == null)
+            {
+                throw new Exception("No product found with id " + id);
+            }
+
+            return TranslateProductEntityToProductContractData(productEntity);
         }
 
         public bool UpdateProduct(Product product)
         {
-            var productEntity = new ProductEntity();
-            TranslateProductContractDataToProductEntity(product, productEntity);
+            var productEntity = TranslateProductContractDataToProductEntity(product);
             return _productLogic.UpdateProduct(productEntity);
         }
 
         #endregion
 
-        private void TranslateProductEntityToProductContractData(
-            ProductEntity productEntity,
-            Product product)
-        {
-            product.ProductID = productEntity.ProductID;
-            product.ProductName = productEntity.ProductName;
-            product.QuantityPerUnit = productEntity.QuantityPerUnit;
-            product.UnitPrice = productEntity.UnitPrice;
-            product.Discontinued = productEntity.Discontinued;
-        }
-
-        private void TranslateProductContractDataToProductEntity(
-            Product product,
+        private Product TranslateProductEntityToProductContractData(
             ProductEntity productEntity)
         {
-            productEntity.ProductID = product.ProductID;
-            productEntity.ProductName = product.ProductName;
-            productEntity.QuantityPerUnit = product.QuantityPerUnit;
-            productEntity.UnitPrice = product.UnitPrice;
-            productEntity.Discontinued = product.Discontinued;
+            return new Product
+                       {
+                           ProductID = productEntity.ProductID,
+                           ProductName = productEntity.ProductName,
+                           QuantityPerUnit = productEntity.QuantityPerUnit,
+                           UnitPrice = productEntity.UnitPrice,
+                           Discontinued = productEntity.Discontinued
+                       };
+        }
+
+        private ProductEntity TranslateProductContractDataToProductEntity(
+            Product product)
+        {
+            return new ProductEntity
+                       {
+                           ProductID = product.ProductID,
+                           ProductName = product.ProductName,
+                           QuantityPerUnit = product.QuantityPerUnit,
+                           UnitPrice = product.UnitPrice,
+                           Discontinued = product.Discontinued
+                       };
         }
     }
 }

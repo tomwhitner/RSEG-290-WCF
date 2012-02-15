@@ -1,23 +1,15 @@
 ﻿using MyWCFServices.RealNorthwindEntities;
+using MyWCFServices.RealNorthwindDAL;
 
 namespace RealNorthwindLogic
 {
     public class ProductLogic
     {
+        ProductDAO productDAO = new ProductDAO();
+
         public ProductEntity GetProduct(int id)
         {
-            // TODO: call data access layer to retrieve product
-            var p = new ProductEntity
-                        {
-                            ProductID = id,
-                            ProductName = "fake product name from business logic layer",
-                            UnitPrice = (decimal) 20.00
-                        };
-            if (id > 50)
-            {
-                p.UnitsOnOrder = 30;
-            }
-            return p;
+            return productDAO.GetProduct(id);
         }
 
         public bool UpdateProduct(ProductEntity product)
@@ -51,7 +43,12 @@ namespace RealNorthwindLogic
             }
 
             // a product can't be discontinued if there are non-fulfilled orders
-            return !(product.Discontinued && productInDB.UnitsOnOrder > 0);
+            if (product.Discontinued == true && productInDB.UnitsOnOrder > 0)
+            {
+                return false;
+            }
+
+            return productDAO.UpdateProduct(product);
         }
     }
 }

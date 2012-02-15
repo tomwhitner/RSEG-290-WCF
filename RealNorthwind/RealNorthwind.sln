@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealNorthwindEntities", "Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealNorthwindLogic", "RealNorthwindLogic\RealNorthwindLogic.csproj", "{B5123944-4137-4E69-91C7-8CCF826231A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealNorthwindDAL", "RealNorthwindDAL\RealNorthwindDAL.csproj", "{24A1C06C-E21A-4C57-A6B0-E8826E17A194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,16 @@ Global
 		{B5123944-4137-4E69-91C7-8CCF826231A2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B5123944-4137-4E69-91C7-8CCF826231A2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B5123944-4137-4E69-91C7-8CCF826231A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{24A1C06C-E21A-4C57-A6B0-E8826E17A194}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

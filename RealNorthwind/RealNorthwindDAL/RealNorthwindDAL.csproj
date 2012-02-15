@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B5123944-4137-4E69-91C7-8CCF826231A2}</ProjectGuid>
+    <ProjectGuid>{24A1C06C-E21A-4C57-A6B0-E8826E17A194}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RealNorthwindLogic</RootNamespace>
-    <AssemblyName>RealNorthwindLogic</AssemblyName>
+    <RootNamespace>RealNorthwindDAL</RootNamespace>
+    <AssemblyName>RealNorthwindDAL</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,21 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductLogic.cs" />
+    <Compile Include="ProductDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RealNorthwindDAL\RealNorthwindDAL.csproj">
-      <Project>{24A1C06C-E21A-4C57-A6B0-E8826E17A194}</Project>
-      <Name>RealNorthwindDAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RealNorthwindEntities\RealNorthwindEntities.csproj">
       <Project>{ECEC9389-B758-4EAA-B864-2FA4393F0091}</Project>
       <Name>RealNorthwindEntities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
