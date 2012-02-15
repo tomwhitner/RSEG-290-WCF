@@ -1,4 +1,5 @@
-﻿using MyWCFServices.RealNorthwindEntities;
+﻿using System.ServiceModel;
+using MyWCFServices.RealNorthwindEntities;
 using RealNorthwindLogic;
 using System;
 
@@ -15,7 +16,11 @@ namespace MyWCFServices.RealNorthwindService
             var productEntity = _productLogic.GetProduct(id);
             if (productEntity == null)
             {
-                throw new Exception("No product found with id " + id);
+                if (id != 999)
+                {
+                     throw new FaultException<ProductFault>(new ProductFault("No product found with id " + id), "Product Fault");
+                }
+                throw new Exception("Test Exception");
             }
 
             return TranslateProductEntityToProductContractData(productEntity);

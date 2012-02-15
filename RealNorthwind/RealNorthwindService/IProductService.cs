@@ -7,6 +7,7 @@ namespace MyWCFServices.RealNorthwindService
     public interface IProductService
     {
         [OperationContract]
+        [FaultContract(typeof(ProductFault))]
         Product GetProduct(int id);
 
         [OperationContract]
@@ -30,5 +31,17 @@ namespace MyWCFServices.RealNorthwindService
 
         [DataMember]
         public bool Discontinued { get; set; }
+    }
+
+    [DataContract]
+    public class ProductFault
+    {
+        public ProductFault(string msg)
+        {
+            FaultMessage = msg;
+        }
+
+        [DataMember] 
+        public string FaultMessage;
     }
 }

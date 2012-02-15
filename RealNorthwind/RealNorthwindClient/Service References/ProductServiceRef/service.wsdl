@@ -134,6 +134,25 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IProductService_GetProduct_ProductFaultFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IProductService_UpdateProduct_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -175,8 +194,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/MyWCFServices.RealNorthwindService" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProductService_GetProduct_InputMessage">
@@ -184,6 +203,9 @@
   </wsdl:message>
   <wsdl:message name="IProductService_GetProduct_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_GetProduct_ProductFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/MyWCFServices.RealNorthwindService" name="detail" element="q1:ProductFault" />
   </wsdl:message>
   <wsdl:message name="IProductService_UpdateProduct_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateProduct" />
@@ -195,6 +217,7 @@
     <wsdl:operation name="GetProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/GetProduct" message="tns:IProductService_GetProduct_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/GetProductResponse" message="tns:IProductService_GetProduct_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IProductService/GetProductProductFaultFault" name="ProductFaultFault" message="tns:IProductService_GetProduct_ProductFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateProduct">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/UpdateProduct" message="tns:IProductService_UpdateProduct_InputMessage" />
@@ -214,6 +237,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IProductService_GetProduct_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ProductFaultFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IProductService_GetProduct_ProductFaultFault_Fault" />
+        <soap12:fault use="literal" name="ProductFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="UpdateProduct">
       <soap12:operation soapAction="http://tempuri.org/IProductService/UpdateProduct" style="document" />

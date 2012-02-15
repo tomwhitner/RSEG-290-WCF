@@ -10,4 +10,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Product" nillable="true" type="tns:Product" />
+  <xs:complexType name="ProductFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FaultMessage" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProductFault" nillable="true" type="tns:ProductFault" />
 </xs:schema>
