@@ -5,11 +5,11 @@ namespace RealNorthwindLogic
 {
     public class ProductLogic
     {
-        ProductDAO productDAO = new ProductDAO();
+        readonly ProductDAO _productDAO = new ProductDAO();
 
         public ProductEntity GetProduct(int id)
         {
-            return productDAO.GetProduct(id);
+            return _productDAO.GetProduct(id);
         }
 
         public bool UpdateProduct(ProductEntity product)
@@ -48,7 +48,7 @@ namespace RealNorthwindLogic
                 return false;
             }
 
-            return productDAO.UpdateProduct(product);
+            return _productDAO.UpdateProduct(product);
         }
     }
 }
