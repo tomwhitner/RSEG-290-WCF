@@ -7,7 +7,7 @@ namespace RealNorthwindClient
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static void MainOld(string[] args)
         {
             var client = new ProductServiceClient();
             var product = client.GetProduct(23);

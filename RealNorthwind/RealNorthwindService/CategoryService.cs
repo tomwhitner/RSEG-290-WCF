@@ -48,6 +48,10 @@ namespace MyWCFServices.RealNorthwindService
             {
                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), "Category Fault");
             }
+            catch (DataException ex)
+            {
+                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), "Category Fault");
+            }
         }
 
         #endregion

@@ -42,7 +42,10 @@ namespace MyWCFServices.RealNorthwindLogic
                 throw new NoNullAllowedException(Resources.MSG_NULL_CAT_DESC);
             }
 
-            _categoryDAO.UpdateCategory(category);
+            if (!_categoryDAO.UpdateCategory(category))
+            {
+                throw new DataException("Update failed.");
+            }
         }
     }
 }

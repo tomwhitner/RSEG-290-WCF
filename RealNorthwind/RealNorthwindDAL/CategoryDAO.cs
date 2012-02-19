@@ -5,6 +5,9 @@ using RealNorthwindDAL.Properties;
 
 namespace MyWCFServices.RealNorthwindDAL
 {
+    /// <summary>
+    /// Implements the data access layer for the category service
+    /// </summary>
     public class CategoryDAO
     {
         private readonly string _connectionString =
