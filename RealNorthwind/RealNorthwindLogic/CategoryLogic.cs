@@ -1,37 +1,48 @@
 ﻿using System;
 using System.Data;
+using MyWCFServices.RealNorthwindDAL;
 using MyWCFServices.RealNorthwindEntities;
-using RealNorthwindDAL;
+using RealNorthwindLogic.Properties;
 
-namespace RealNorthwindLogic
+namespace MyWCFServices.RealNorthwindLogic
 {
+    /// <summary>
+    /// Implements the business logic layer for the category service
+    /// </summary>
     public class CategoryLogic
     {
-        readonly CategoryDAO _categoryDAO = new CategoryDAO();
+        private const int MinCategoryID = 1;
+        private const int MaxCategoryID = 8;
+        private readonly CategoryDAO _categoryDAO = new CategoryDAO();
 
         public CategoryEntity GetCategory(int id)
         {
+            if ((id < MinCategoryID) || (id > MaxCategoryID))
+            {
+                throw new ArgumentOutOfRangeException("id");
+            }
+
             return _categoryDAO.GetCategory(id);
         }
 
-        public bool UpdateCategory(CategoryEntity category)
+        public void UpdateCategory(CategoryEntity category)
         {
             if (category == null)
             {
                 throw new ArgumentNullException("category");
             }
 
-            if (string.IsNullOrEmpty(category.Name))
+            if (string.IsNullOrEmpty(category.CategoryName))
             {
-                throw new NoNullAllowedException("Category name cannot be null.");  // make resource
+                throw new NoNullAllowedException(Resources.MSG_NULL_CAT_NAME);
             }
 
             if (string.IsNullOrEmpty(category.Description))
-            {  
-                throw new NoNullAllowedException("Category description cannot be null.");  // make resource
+            {
+                throw new NoNullAllowedException(Resources.MSG_NULL_CAT_DESC);
             }
 
-            return _categoryDAO.UpdateCategory(category);
+            _categoryDAO.UpdateCategory(category);
         }
     }
 }

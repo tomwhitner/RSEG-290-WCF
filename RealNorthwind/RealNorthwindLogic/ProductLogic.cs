@@ -1,7 +1,7 @@
 ﻿using MyWCFServices.RealNorthwindEntities;
 using MyWCFServices.RealNorthwindDAL;
 
-namespace RealNorthwindLogic
+namespace MyWCFServices.RealNorthwindLogic
 {
     public class ProductLogic
     {

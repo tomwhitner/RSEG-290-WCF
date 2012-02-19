@@ -1,8 +1,9 @@
 ﻿using System.Configuration;
 using System.Data.SqlClient;
 using MyWCFServices.RealNorthwindEntities;
+using RealNorthwindDAL.Properties;
 
-namespace RealNorthwindDAL
+namespace MyWCFServices.RealNorthwindDAL
 {
     public class CategoryDAO
     {
@@ -14,19 +15,25 @@ namespace RealNorthwindDAL
             CategoryEntity c = null;
             using (var conn = new SqlConnection(_connectionString))
             {
-                var cmd = new SqlCommand { CommandText = "select CategoryName, Description from Categories where CategoryID=@id", Connection = conn };
-                cmd.Parameters.AddWithValue("@id", id);
+                var cmd = new SqlCommand(string.Format(Resources.DB_SQL_CAL_SEL,
+                                                       Resources.DB_COL_CAT_NAME + ", " +
+                                                       Resources.DB_COL_CAT_DESC,
+                                                       Resources.DB_TAB_CAT,
+                                                       Resources.DB_COL_CAT_ID,
+                                                       Resources.DB_COL_CAT_ID), conn);
+
+                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_ID, id);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
                     reader.Read();
                     c = new CategoryEntity
-                    {
-                        CategoryID = id,
-                        Name = (string)reader["CategoryName"],
-                        Description = (string)reader["Description"]
-                    };
+                            {
+                                CategoryID = id,
+                                CategoryName = (string) reader[Resources.DB_COL_CAT_NAME],
+                                Description = (string) reader[Resources.DB_COL_CAT_DESC]
+                            };
                 }
             }
             return c;
@@ -36,12 +43,15 @@ namespace RealNorthwindDAL
         {
             using (var conn = new SqlConnection(_connectionString))
             {
-                var cmd =
-                    new SqlCommand(
-                        "UPDATE Categories SET CategoryName=@name, Description=@description WHERE CategoryID=@id", conn);
-                cmd.Parameters.AddWithValue("@name", category.Name);
-                cmd.Parameters.AddWithValue("@description", category.Description);
-                cmd.Parameters.AddWithValue("@id", category.CategoryID);
+                var cmd = new SqlCommand(
+                    string.Format(Resources.DB_SQL_CAL_UPD, Resources.DB_TAB_CAT, Resources.DB_COL_CAT_NAME,
+                                  Resources.DB_COL_CAT_NAME,
+                                  Resources.DB_COL_CAT_DESC, Resources.DB_COL_CAT_DESC, Resources.DB_COL_CAT_ID,
+                                  Resources.DB_COL_CAT_ID), conn);
+
+                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_NAME, category.CategoryName);
+                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_DESC, category.Description);
+                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_ID, category.CategoryID);
                 conn.Open();
                 int numRows = cmd.ExecuteNonQuery();
 

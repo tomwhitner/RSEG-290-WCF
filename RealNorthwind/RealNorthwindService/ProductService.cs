@@ -1,6 +1,6 @@
 ﻿using System.ServiceModel;
 using MyWCFServices.RealNorthwindEntities;
-using RealNorthwindLogic;
+using MyWCFServices.RealNorthwindLogic;
 using System;
 
 namespace MyWCFServices.RealNorthwindService
