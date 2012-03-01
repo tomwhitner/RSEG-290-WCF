@@ -70,6 +70,10 @@ namespace RealNorthwindClient
                 Console.WriteLine(string.Format(" - Category Updated: ID = {0}, Name = {1}, Description = {2}", cat.ID, cat.Name,
                                                 cat.Description));
             }
+            catch (FaultException<CategoryFault> ex)
+            {
+                Console.WriteLine(string.Format(" - Update Exception: {0}", ex.Detail.FaultMessage));
+            }
             catch (FaultException ex)
             {
                 Console.WriteLine(string.Format(" - Update Exception: {0}", ex.Message));
