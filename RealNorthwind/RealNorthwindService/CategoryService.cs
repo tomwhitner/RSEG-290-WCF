@@ -12,6 +12,7 @@ namespace MyWCFServices.RealNorthwindService
     public class CategoryService : ICategoryService
     {
         private readonly CategoryLogic _categoryLogic = new CategoryLogic();
+        private const String FaultSource = "Category Fault";
 
         #region ICategoryService Members
 
@@ -29,7 +30,7 @@ namespace MyWCFServices.RealNorthwindService
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), "Category Fault");
+                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
         }
 
@@ -46,11 +47,11 @@ namespace MyWCFServices.RealNorthwindService
             }
             catch (NoNullAllowedException ex)
             {
-                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), "Category Fault");
+                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
             catch (DataException ex)
             {
-                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), "Category Fault");
+                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
         }
 

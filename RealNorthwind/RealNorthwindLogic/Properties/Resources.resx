@@ -104,4 +104,7 @@
   <data name="MSG_NULL_CAT_DESC">
     <value xml:space="preserve">Category description cannot be null.</value>
   </data>
+  <data name="MSG_UPDATE_FAILED">
+    <value xml:space="preserve">Update failed.</value>
+  </data>
 </root>

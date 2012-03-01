@@ -44,7 +44,7 @@ namespace MyWCFServices.RealNorthwindLogic
 
             if (!_categoryDAO.UpdateCategory(category))
             {
-                throw new DataException("Update failed.");
+                throw new DataException(Resources.MSG_UPDATE_FAILED);
             }
         }
     }

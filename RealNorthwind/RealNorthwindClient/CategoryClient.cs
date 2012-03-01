@@ -52,6 +52,14 @@ namespace RealNorthwindClient
             try
             {
                 Console.WriteLine(string.Format("\nAttempting to update category {0}.", id));
+                if (name == null)
+                {
+                    Console.WriteLine(string.Format(" - Name = null."));
+                }
+                if (description == null)
+                {
+                    Console.WriteLine(string.Format(" - Description = null."));
+                }
                 var cat = new Category
                               {
                                   ID = id,
