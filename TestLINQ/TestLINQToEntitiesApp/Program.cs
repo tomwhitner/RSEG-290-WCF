@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 
 namespace TestLINQToEntitiesApp
@@ -9,7 +10,8 @@ namespace TestLINQToEntitiesApp
         static void Main()
         {
             // CRUD operations on tables
-            TestTables();
+            //TestTables();
+            ViewGeneratedSql();
             Console.WriteLine("Press any key to continue ...");
             Console.ReadKey();
         }
@@ -28,7 +30,8 @@ namespace TestLINQToEntitiesApp
             var bev1 = beverages.ElementAtOrDefault(10);
             if (bev1 != null)
             {
-                if (bev1.UnitPrice != null) {
+                if (bev1.UnitPrice != null)
+                {
                     decimal newPrice = (decimal)bev1.UnitPrice + 10.00m;
                     Console.WriteLine("The price of {0} is {1}. Update to {2}",
                                       bev1.ProductName, bev1.UnitPrice, newPrice);
@@ -62,6 +65,31 @@ namespace TestLINQToEntitiesApp
                 nwEntities.SaveChanges();
             }
             nwEntities.Dispose();
+        }
+
+        static void ViewGeneratedSql()
+        {﻿﻿
+            var nwEntities = new NorthwindEntities();
+            IQueryable<Product> beverages =
+                from p in nwEntities.Products
+                where p.Category.CategoryName == "Beverages"
+                orderby p.ProductName
+                select p;
+            // view SQL using ToTraceString method
+            Console.WriteLine("The SQL statement is:\n" + beverages.ToTraceString());
+            nwEntities.Dispose();
+        }
+    }
+
+    public static class MyExtensions
+    {
+        public static string ToTraceString<T>(this IQueryable<T> t)
+        {
+            string sql = "";
+            var oqt = t as ObjectQuery<T>;
+            if (oqt != null)
+                sql = oqt.ToTraceString();
+            return sql;
         }
     }
 }
