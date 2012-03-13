@@ -6,7 +6,7 @@ namespace RealNorthwindClient
 {
     internal class CategoryClient
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             TestGetCategory(0);
             TestGetCategory(1);
@@ -31,8 +31,8 @@ namespace RealNorthwindClient
             {
                 Console.WriteLine(string.Format("\nAttempting to retrieve category {0}.", id));
                 Category cat = catService.GetCategory(id);
-                Console.WriteLine(string.Format(" - Category Retrieved: ID = {0}, Name = {1}, Description = {2}", cat.ID, cat.Name,
-                                                cat.Description));
+                Console.WriteLine(string.Format(" - Category Retrieved: ID = {0}, Name = {1}, Description = {2}", 
+                    cat.ID, cat.Name,cat.Description));
             }
             catch (FaultException<CategoryFault> ex)
             {
@@ -70,9 +70,17 @@ namespace RealNorthwindClient
                                   Name = name,
                                   Description = description
                               };
-                catService.UpdateCategory(cat);
-                Console.WriteLine(string.Format(" - Category Updated: ID = {0}, Name = {1}, Description = {2}", cat.ID, cat.Name,
-                                                cat.Description));
+                bool result = catService.UpdateCategory(cat);
+                if (result)
+                {
+                    Console.WriteLine(string.Format(" - Category Updated: ID = {0}, Name = {1}, Description = {2}",
+                                                    cat.ID, cat.Name,
+                                                    cat.Description));
+                }
+                else
+                {
+                    Console.WriteLine(" - Category was not updated.");
+                }
             }
             catch (FaultException<CategoryFault> ex)
             {

@@ -140,11 +140,12 @@ namespace RealNorthwindClient.CategoryServiceRef {
     public interface ICategoryService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/GetCategory", ReplyAction="http://tempuri.org/ICategoryService/GetCategoryResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(RealNorthwindClient.CategoryServiceRef.CategoryFault), Action="http://tempuri.org/ICategoryService/GetCategoryCategoryFaultFault", Name="CategoryFault", Namespace="http://schemas.datacontract.org/2004/07/MyWCFServices.RealNorthwindService")]
         RealNorthwindClient.CategoryServiceRef.Category GetCategory(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICategoryService/UpdateCategory", ReplyAction="http://tempuri.org/ICategoryService/UpdateCategoryResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(RealNorthwindClient.CategoryServiceRef.CategoryFault), Action="http://tempuri.org/ICategoryService/UpdateCategoryCategoryFaultFault", Name="CategoryFault", Namespace="http://schemas.datacontract.org/2004/07/MyWCFServices.RealNorthwindService")]
-        void UpdateCategory(RealNorthwindClient.CategoryServiceRef.Category category);
+        bool UpdateCategory(RealNorthwindClient.CategoryServiceRef.Category category);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -178,8 +179,8 @@ namespace RealNorthwindClient.CategoryServiceRef {
             return base.Channel.GetCategory(id);
         }
         
-        public void UpdateCategory(RealNorthwindClient.CategoryServiceRef.Category category) {
-            base.Channel.UpdateCategory(category);
+        public bool UpdateCategory(RealNorthwindClient.CategoryServiceRef.Category category) {
+            return base.Channel.UpdateCategory(category);
         }
     }
 }

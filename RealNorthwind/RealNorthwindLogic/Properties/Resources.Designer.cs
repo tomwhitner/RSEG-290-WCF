@@ -77,14 +77,5 @@ namespace RealNorthwindLogic.Properties {
                 return ResourceManager.GetString("MSG_NULL_CAT_NAME", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update failed..
-        /// </summary>
-        internal static string MSG_UPDATE_FAILED {
-            get {
-                return ResourceManager.GetString("MSG_UPDATE_FAILED", resourceCulture);
-            }
-        }
     }
 }

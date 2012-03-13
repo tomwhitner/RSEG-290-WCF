@@ -11,52 +11,32 @@ namespace MyWCFServices.RealNorthwindLogic
     /// </summary>
     public class CategoryLogic
     {
-        private const int MinCategoryID = 1;
-        private const int MaxCategoryID = 18;
         private readonly CategoryDAO _categoryDAO = new CategoryDAO();
 
         public Category GetCategory(int id)
         {
-            if ((id < MinCategoryID) || (id > MaxCategoryID))
-            {
-                throw new ArgumentOutOfRangeException("id");
-            }
-
-            Category category = null;
-
-            try
-            {
-                category = _categoryDAO.GetCategory(id);  
-            }
-            catch (ArgumentException ex)
-            {
-                throw new DataException(ex.Message, ex); 
-            }
-
-            return category;
+            return _categoryDAO.GetCategory(id);
         }
 
-        public void UpdateCategory(Category category)
+        public bool UpdateCategory(Category category)
         {
             if (category == null)
             {
                 throw new ArgumentNullException("category");
             }
 
+            /* Enforced by EF
             if (string.IsNullOrEmpty(category.CategoryName))
             {
                 throw new NoNullAllowedException(Resources.MSG_NULL_CAT_NAME);
-            }
+            } */
 
             if (string.IsNullOrEmpty(category.Description))
             {
                 throw new NoNullAllowedException(Resources.MSG_NULL_CAT_DESC);
             }
 
-            if (!_categoryDAO.UpdateCategory(category))
-            {
-                throw new DataException(Resources.MSG_UPDATE_FAILED);
-            }
+            return _categoryDAO.UpdateCategory(category);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.ServiceModel;
 using MyWCFServices.RealNorthwindLogic;
+using RealNorthwindService.Properties;
 using CategoryEntity = MyWCFServices.RealNorthwindEntities.Category;
 
 namespace MyWCFServices.RealNorthwindService
@@ -23,37 +23,35 @@ namespace MyWCFServices.RealNorthwindService
         /// <returns>The requested category</returns>
         public Category GetCategory(int id)
         {
+            CategoryEntity category = null;
+
             try
             {
-                var category = _categoryLogic.GetCategory(id);
-                return TranslateCategoryEntityToCategoryContractData(category);
+                category = _categoryLogic.GetCategory(id);
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (Exception ex)
             {
                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
-            catch (DataException ex)
+            if (category == null)
             {
-                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
+                throw new FaultException<CategoryFault>(new CategoryFault(Resources.MSG_CAT_NOT_EXISTS), FaultSource);
             }
+            return TranslateCategoryEntityToCategoryContractData(category);
         }
 
         /// <summary>
         /// Updates the specified category
         /// </summary>
         /// <param name="category">The category to update</param>
-        public void UpdateCategory(Category category)
+        public bool UpdateCategory(Category category)
         {
             try
             {
                 CategoryEntity c = TranslateCategoryContractDataToCategoryEntity(category);
-                _categoryLogic.UpdateCategory(c);
+                return _categoryLogic.UpdateCategory(c);
             }
-            catch (NoNullAllowedException ex)
-            {
-                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
-            }
-            catch (DataException ex)
+            catch (Exception ex)
             {
                  throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }

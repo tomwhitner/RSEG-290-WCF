@@ -14,6 +14,7 @@ namespace MyWCFServices.RealNorthwindService
         /// <param name="id">The id of the category to retrieve</param>
         /// <returns>The requested category</returns>
         [OperationContract]
+        [FaultContract(typeof(CategoryFault))]
         Category GetCategory(int id);
 
         /// <summary>
@@ -22,6 +23,6 @@ namespace MyWCFServices.RealNorthwindService
         /// <param name="category">The category to update</param>
         [OperationContract]
         [FaultContract(typeof (CategoryFault))]
-        void UpdateCategory(Category category);
+        bool UpdateCategory(Category category);
     }
 }

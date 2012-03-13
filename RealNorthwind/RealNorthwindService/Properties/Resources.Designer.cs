@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RealNorthwindDAL.Properties {
+namespace RealNorthwindService.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace RealNorthwindDAL.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RealNorthwindDAL.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RealNorthwindService.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace RealNorthwindDAL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The specified category does not exist..
+        ///   Looks up a localized string similar to The requested category does not exist..
         /// </summary>
-        internal static string MSG_NO_SUCH_CATEGORY {
+        internal static string MSG_CAT_NOT_EXISTS {
             get {
-                return ResourceManager.GetString("MSG_NO_SUCH_CATEGORY", resourceCulture);
+                return ResourceManager.GetString("MSG_CAT_NOT_EXISTS", resourceCulture);
             }
         }
     }
