@@ -61,56 +61,11 @@ namespace RealNorthwindDAL.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description.
+        ///   Looks up a localized string similar to The specified category does not exist..
         /// </summary>
-        internal static string DB_COL_CAT_DESC {
+        internal static string MSG_NO_SUCH_CATEGORY {
             get {
-                return ResourceManager.GetString("DB_COL_CAT_DESC", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CategoryID.
-        /// </summary>
-        internal static string DB_COL_CAT_ID {
-            get {
-                return ResourceManager.GetString("DB_COL_CAT_ID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CategoryName.
-        /// </summary>
-        internal static string DB_COL_CAT_NAME {
-            get {
-                return ResourceManager.GetString("DB_COL_CAT_NAME", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SELECT {0} from {1} where {2} =@{3}.
-        /// </summary>
-        internal static string DB_SQL_CAL_SEL {
-            get {
-                return ResourceManager.GetString("DB_SQL_CAL_SEL", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UPDATE {0} SET {1}=@{2}, {3}=@{4} WHERE {5}=@{6}.
-        /// </summary>
-        internal static string DB_SQL_CAL_UPD {
-            get {
-                return ResourceManager.GetString("DB_SQL_CAL_UPD", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Categories.
-        /// </summary>
-        internal static string DB_TAB_CAT {
-            get {
-                return ResourceManager.GetString("DB_TAB_CAT", resourceCulture);
+                return ResourceManager.GetString("MSG_NO_SUCH_CATEGORY", resourceCulture);
             }
         }
     }

@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DB_COL_CAT_DESC" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="DB_COL_CAT_ID" xml:space="preserve">
-    <value>CategoryID</value>
-  </data>
-  <data name="DB_COL_CAT_NAME" xml:space="preserve">
-    <value>CategoryName</value>
-  </data>
-  <data name="DB_SQL_CAL_SEL" xml:space="preserve">
-    <value>SELECT {0} from {1} where {2} =@{3}</value>
-  </data>
-  <data name="DB_SQL_CAL_UPD" xml:space="preserve">
-    <value>UPDATE {0} SET {1}=@{2}, {3}=@{4} WHERE {5}=@{6}</value>
-  </data>
-  <data name="DB_TAB_CAT" xml:space="preserve">
-    <value>Categories</value>
+  <data name="MSG_NO_SUCH_CATEGORY" xml:space="preserve">
+    <value>The specified category does not exist.</value>
   </data>
 </root>

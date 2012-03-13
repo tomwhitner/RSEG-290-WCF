@@ -12,20 +12,31 @@ namespace MyWCFServices.RealNorthwindLogic
     public class CategoryLogic
     {
         private const int MinCategoryID = 1;
-        private const int MaxCategoryID = 8;
+        private const int MaxCategoryID = 18;
         private readonly CategoryDAO _categoryDAO = new CategoryDAO();
 
-        public CategoryEntity GetCategory(int id)
+        public Category GetCategory(int id)
         {
             if ((id < MinCategoryID) || (id > MaxCategoryID))
             {
                 throw new ArgumentOutOfRangeException("id");
             }
 
-            return _categoryDAO.GetCategory(id);
+            Category category = null;
+
+            try
+            {
+                category = _categoryDAO.GetCategory(id);  
+            }
+            catch (ArgumentException ex)
+            {
+                throw new DataException(ex.Message, ex); 
+            }
+
+            return category;
         }
 
-        public void UpdateCategory(CategoryEntity category)
+        public void UpdateCategory(Category category)
         {
             if (category == null)
             {

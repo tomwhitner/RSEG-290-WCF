@@ -1,6 +1,6 @@
-﻿using System.Configuration;
-using System.Data.SqlClient;
+﻿using System;
 using MyWCFServices.RealNorthwindEntities;
+using System.Linq;
 using RealNorthwindDAL.Properties;
 
 namespace MyWCFServices.RealNorthwindDAL
@@ -10,56 +10,41 @@ namespace MyWCFServices.RealNorthwindDAL
     /// </summary>
     public class CategoryDAO
     {
-        private readonly string _connectionString =
-            ConfigurationManager.ConnectionStrings["NorthwindConnectionString"].ConnectionString;
+        private readonly NorthwindEntities _nwEntities = new NorthwindEntities();
 
-        public CategoryEntity GetCategory(int id)
+        public Category GetCategory(int id)
         {
-            CategoryEntity c = null;
-            using (var conn = new SqlConnection(_connectionString))
-            {
-                var cmd = new SqlCommand(string.Format(Resources.DB_SQL_CAL_SEL,
-                                                       Resources.DB_COL_CAT_NAME + ", " +
-                                                       Resources.DB_COL_CAT_DESC,
-                                                       Resources.DB_TAB_CAT,
-                                                       Resources.DB_COL_CAT_ID,
-                                                       Resources.DB_COL_CAT_ID), conn);
+            var categories = from c in _nwEntities.Categories
+                                where c.CategoryID == id
+                                select c;
 
-                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_ID, id);
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    c = new CategoryEntity
-                            {
-                                CategoryID = id,
-                                CategoryName = (string) reader[Resources.DB_COL_CAT_NAME],
-                                Description = (string) reader[Resources.DB_COL_CAT_DESC]
-                            };
-                }
+            var category = categories.SingleOrDefault();
+
+            // 1. Test if the passed in entity data object is a valid category in database 
+            if (category == null)
+            {
+                throw new ArgumentException(Resources.MSG_NO_SUCH_CATEGORY);
             }
-            return c;
+
+            return category;
         }
 
-        public bool UpdateCategory(CategoryEntity category)
+        public bool UpdateCategory(Category category)
         {
-            using (var conn = new SqlConnection(_connectionString))
-            {
-                var cmd = new SqlCommand(
-                    string.Format(Resources.DB_SQL_CAL_UPD, Resources.DB_TAB_CAT, Resources.DB_COL_CAT_NAME,
-                                  Resources.DB_COL_CAT_NAME,
-                                  Resources.DB_COL_CAT_DESC, Resources.DB_COL_CAT_DESC, Resources.DB_COL_CAT_ID,
-                                  Resources.DB_COL_CAT_ID), conn);
+            // 1. Test if the passed in entity data object is a valid category in database 
+            // taken care of in get...
 
-                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_NAME, category.CategoryName);
-                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_DESC, category.Description);
-                cmd.Parameters.AddWithValue("@" + Resources.DB_COL_CAT_ID, category.CategoryID);
-                conn.Open();
-                int numRows = cmd.ExecuteNonQuery();
+            // 2. Retrieve the entity object from database 
+            var temp = GetCategory(category.CategoryID);
 
-                return (numRows == 1);
-            }
+            // 3. Update the entity object 
+            temp.CategoryName = category.CategoryName;
+            temp.CategoryID = category.CategoryID;
+
+            // 4. Submit the changes to database 
+            var numRows = _nwEntities.SaveChanges();
+
+            return (numRows == 1);
         }
     }
 }

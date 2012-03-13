@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.ServiceModel;
-using MyWCFServices.RealNorthwindEntities;
 using MyWCFServices.RealNorthwindLogic;
+using CategoryEntity = MyWCFServices.RealNorthwindEntities.Category;
 
 namespace MyWCFServices.RealNorthwindService
 {
@@ -25,10 +25,14 @@ namespace MyWCFServices.RealNorthwindService
         {
             try
             {
-                CategoryEntity categoryEntity = _categoryLogic.GetCategory(id);
-                return TranslateCategoryEntityToCategoryContractData(categoryEntity);
+                var category = _categoryLogic.GetCategory(id);
+                return TranslateCategoryEntityToCategoryContractData(category);
             }
             catch (ArgumentOutOfRangeException ex)
+            {
+                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
+            }
+            catch (DataException ex)
             {
                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
@@ -42,41 +46,39 @@ namespace MyWCFServices.RealNorthwindService
         {
             try
             {
-                CategoryEntity categoryEntity = TranslateCategoryContractDataToCategoryEntity(category);
-                _categoryLogic.UpdateCategory(categoryEntity);
+                CategoryEntity c = TranslateCategoryContractDataToCategoryEntity(category);
+                _categoryLogic.UpdateCategory(c);
             }
             catch (NoNullAllowedException ex)
             {
-                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
+                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
             catch (DataException ex)
             {
-                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
+                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
         }
 
         #endregion
 
-        private Category TranslateCategoryEntityToCategoryContractData(
-            CategoryEntity categoryEntity)
+        private Category TranslateCategoryEntityToCategoryContractData(CategoryEntity category)
         {
             return new Category
-                       {
-                           ID = categoryEntity.CategoryID,
-                           Name = categoryEntity.CategoryName,
-                           Description = categoryEntity.Description
-                       };
+            {
+                ID = category.CategoryID,
+                Name = category.CategoryName,
+                Description = category.Description
+            };
         }
 
-        private CategoryEntity TranslateCategoryContractDataToCategoryEntity(
-            Category category)
+        private CategoryEntity TranslateCategoryContractDataToCategoryEntity(Category category)
         {
             return new CategoryEntity
-                       {
-                           CategoryID = category.ID,
-                           CategoryName = category.Name,
-                           Description = category.Description
-                       };
+            {
+                CategoryID = category.ID,
+                CategoryName = category.Name,
+                Description = category.Description
+            };
         }
     }
 }
