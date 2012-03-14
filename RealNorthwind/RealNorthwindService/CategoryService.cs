@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using MyWCFServices.RealNorthwindLogic;
 using RealNorthwindService.Properties;
-using CategoryEntity = MyWCFServices.RealNorthwindEntities.Category;
+using MyWCFServices.RealNorthwindEntities;
 
 namespace MyWCFServices.RealNorthwindService
 {
@@ -23,7 +23,7 @@ namespace MyWCFServices.RealNorthwindService
         /// <returns>The requested category</returns>
         public Category GetCategory(int id)
         {
-            CategoryEntity category = null;
+            CategoryEntity category;
 
             try
             {
@@ -59,17 +59,19 @@ namespace MyWCFServices.RealNorthwindService
 
         #endregion
 
-        private Category TranslateCategoryEntityToCategoryContractData(CategoryEntity category)
+        private Category TranslateCategoryEntityToCategoryContractData(
+            CategoryEntity categoryEntity)
         {
             return new Category
             {
-                ID = category.CategoryID,
-                Name = category.CategoryName,
-                Description = category.Description
+                ID = categoryEntity.CategoryID,
+                Name = categoryEntity.CategoryName,
+                Description = categoryEntity.Description
             };
         }
 
-        private CategoryEntity TranslateCategoryContractDataToCategoryEntity(Category category)
+        private CategoryEntity TranslateCategoryContractDataToCategoryEntity(
+            Category category)
         {
             return new CategoryEntity
             {

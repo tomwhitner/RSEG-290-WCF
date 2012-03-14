@@ -1,5 +1,4 @@
 ﻿using System;
-using MyWCFServices.RealNorthwindEntities;
 using System.Linq;
 
 namespace MyWCFServices.RealNorthwindDAL
@@ -10,7 +9,6 @@ namespace MyWCFServices.RealNorthwindDAL
     public class CategoryDAO
     {
         private readonly NorthwindEntities _nwEntities = new NorthwindEntities();
-
 
         // 1. Convert the entity object to your entity data object 
         //        v

@@ -2,7 +2,7 @@
 using System.Data;
 using MyWCFServices.RealNorthwindDAL;
 using MyWCFServices.RealNorthwindEntities;
-using RealNorthwindLogic.Properties;
+using MyWCFServices.RealNorthwindLogic.Properties;
 
 namespace MyWCFServices.RealNorthwindLogic
 {
@@ -13,30 +13,48 @@ namespace MyWCFServices.RealNorthwindLogic
     {
         private readonly CategoryDAO _categoryDAO = new CategoryDAO();
 
-        public Category GetCategory(int id)
+        public CategoryEntity GetCategory(int id)
         {
-            return _categoryDAO.GetCategory(id);
+            var c = _categoryDAO.GetCategory(id);
+            return TranslateCategoryDataEntityToCategoryEntity(c);
         }
 
-        public bool UpdateCategory(Category category)
+        public bool UpdateCategory(CategoryEntity category)
         {
             if (category == null)
             {
                 throw new ArgumentNullException("category");
             }
 
-            /* Enforced by EF
-            if (string.IsNullOrEmpty(category.CategoryName))
-            {
-                throw new NoNullAllowedException(Resources.MSG_NULL_CAT_NAME);
-            } */
-
             if (string.IsNullOrEmpty(category.Description))
             {
                 throw new NoNullAllowedException(Resources.MSG_NULL_CAT_DESC);
             }
 
-            return _categoryDAO.UpdateCategory(category);
+            var c = TranslateCategoryEntityToCategoryDataEntity(category);
+            return _categoryDAO.UpdateCategory(c);
+        }
+
+        private Category TranslateCategoryEntityToCategoryDataEntity(
+            CategoryEntity categoryEntity)
+        {
+            return new Category
+            {
+                CategoryID = categoryEntity.CategoryID,
+                CategoryName = categoryEntity.CategoryName,
+                Description = categoryEntity.Description
+            };
+        }
+
+        private CategoryEntity TranslateCategoryDataEntityToCategoryEntity(
+            Category category)
+        {
+            return new CategoryEntity
+            {
+                CategoryID = category.CategoryID,
+                CategoryName = category.CategoryName,
+                Description = category.Description
+            };
         }
     }
 }

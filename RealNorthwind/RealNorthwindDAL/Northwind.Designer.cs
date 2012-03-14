@@ -17,7 +17,7 @@ using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 
-namespace MyWCFServices.RealNorthwindEntities
+namespace MyWCFServices.RealNorthwindDAL
 {
     #region Contexts
     

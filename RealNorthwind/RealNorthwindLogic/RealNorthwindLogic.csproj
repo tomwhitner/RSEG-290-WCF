@@ -8,7 +8,7 @@
     <ProjectGuid>{B5123944-4137-4E69-91C7-8CCF826231A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RealNorthwindLogic</RootNamespace>
+    <RootNamespace>MyWCFServices.RealNorthwindLogic</RootNamespace>
     <AssemblyName>RealNorthwindLogic</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
