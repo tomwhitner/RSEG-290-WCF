@@ -35,26 +35,34 @@ namespace MyWCFServices.RealNorthwindLogic
             return _categoryDAO.UpdateCategory(c);
         }
 
+        #region Translation methods
+
         private Category TranslateCategoryEntityToCategoryDataEntity(
             CategoryEntity categoryEntity)
         {
-            return new Category
-            {
-                CategoryID = categoryEntity.CategoryID,
-                CategoryName = categoryEntity.CategoryName,
-                Description = categoryEntity.Description
-            };
+            return (categoryEntity == null
+                        ? null
+                        : new Category
+                              {
+                                  CategoryID = categoryEntity.CategoryID,
+                                  CategoryName = categoryEntity.CategoryName,
+                                  Description = categoryEntity.Description
+                              });
         }
 
         private CategoryEntity TranslateCategoryDataEntityToCategoryEntity(
             Category category)
         {
-            return new CategoryEntity
-            {
-                CategoryID = category.CategoryID,
-                CategoryName = category.CategoryName,
-                Description = category.Description
-            };
+            return (category == null
+                        ? null
+                        :new CategoryEntity
+                       {
+                           CategoryID = category.CategoryID,
+                           CategoryName = category.CategoryName,
+                           Description = category.Description
+                       });
         }
+
+        #endregion
     }
 }

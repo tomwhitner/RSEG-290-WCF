@@ -31,8 +31,8 @@ namespace RealNorthwindClient
             {
                 Console.WriteLine(string.Format("\nAttempting to retrieve category {0}.", id));
                 Category cat = catService.GetCategory(id);
-                Console.WriteLine(string.Format(" - Category Retrieved: ID = {0}, Name = {1}, Description = {2}", 
-                    cat.ID, cat.Name,cat.Description));
+                Console.WriteLine(string.Format(" - Category Retrieved: ID = {0}, Name = {1}, Description = {2}",
+                                                cat.ID, cat.Name, cat.Description));
             }
             catch (FaultException<CategoryFault> ex)
             {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ServiceModel;
+using MyWCFServices.RealNorthwindEntities;
 using MyWCFServices.RealNorthwindLogic;
 using RealNorthwindService.Properties;
-using MyWCFServices.RealNorthwindEntities;
 
 namespace MyWCFServices.RealNorthwindService
 {
@@ -11,8 +11,8 @@ namespace MyWCFServices.RealNorthwindService
     /// </summary>
     public class CategoryService : ICategoryService
     {
-        private readonly CategoryLogic _categoryLogic = new CategoryLogic();
         private const String FaultSource = "Category Fault";
+        private readonly CategoryLogic _categoryLogic = new CategoryLogic();
 
         #region ICategoryService Members
 
@@ -53,32 +53,35 @@ namespace MyWCFServices.RealNorthwindService
             }
             catch (Exception ex)
             {
-                 throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
+                throw new FaultException<CategoryFault>(new CategoryFault(ex.Message), FaultSource);
             }
         }
 
         #endregion
 
+        #region Translation methods
+
         private Category TranslateCategoryEntityToCategoryContractData(
             CategoryEntity categoryEntity)
         {
             return new Category
-            {
-                ID = categoryEntity.CategoryID,
-                Name = categoryEntity.CategoryName,
-                Description = categoryEntity.Description
-            };
+                       {
+                           ID = categoryEntity.CategoryID,
+                           Name = categoryEntity.CategoryName,
+                           Description = categoryEntity.Description
+                       };
         }
 
         private CategoryEntity TranslateCategoryContractDataToCategoryEntity(
             Category category)
         {
             return new CategoryEntity
-            {
-                CategoryID = category.ID,
-                CategoryName = category.Name,
-                Description = category.Description
-            };
+                       {
+                           CategoryID = category.ID,
+                           CategoryName = category.Name,
+                           Description = category.Description
+                       };
         }
+        #endregion
     }
 }
