@@ -61,7 +61,7 @@ namespace MyWCFServices.RealNorthwindService
 
         #region Translation methods
 
-        private Category TranslateCategoryEntityToCategoryContractData(
+        private static Category TranslateCategoryEntityToCategoryContractData(
             CategoryEntity categoryEntity)
         {
             return new Category
@@ -72,7 +72,7 @@ namespace MyWCFServices.RealNorthwindService
                        };
         }
 
-        private CategoryEntity TranslateCategoryContractDataToCategoryEntity(
+        private static CategoryEntity TranslateCategoryContractDataToCategoryEntity(
             Category category)
         {
             return new CategoryEntity

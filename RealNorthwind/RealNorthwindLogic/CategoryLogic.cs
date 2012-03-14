@@ -15,8 +15,7 @@ namespace MyWCFServices.RealNorthwindLogic
 
         public CategoryEntity GetCategory(int id)
         {
-            var c = _categoryDAO.GetCategory(id);
-            return TranslateCategoryDataEntityToCategoryEntity(c);
+            return _categoryDAO.GetCategory(id);
         }
 
         public bool UpdateCategory(CategoryEntity category)
@@ -31,38 +30,7 @@ namespace MyWCFServices.RealNorthwindLogic
                 throw new NoNullAllowedException(Resources.MSG_NULL_CAT_DESC);
             }
 
-            var c = TranslateCategoryEntityToCategoryDataEntity(category);
-            return _categoryDAO.UpdateCategory(c);
+            return _categoryDAO.UpdateCategory(category);
         }
-
-        #region Translation methods
-
-        private Category TranslateCategoryEntityToCategoryDataEntity(
-            CategoryEntity categoryEntity)
-        {
-            return (categoryEntity == null
-                        ? null
-                        : new Category
-                              {
-                                  CategoryID = categoryEntity.CategoryID,
-                                  CategoryName = categoryEntity.CategoryName,
-                                  Description = categoryEntity.Description
-                              });
-        }
-
-        private CategoryEntity TranslateCategoryDataEntityToCategoryEntity(
-            Category category)
-        {
-            return (category == null
-                        ? null
-                        :new CategoryEntity
-                       {
-                           CategoryID = category.CategoryID,
-                           CategoryName = category.CategoryName,
-                           Description = category.Description
-                       });
-        }
-
-        #endregion
     }
 }
