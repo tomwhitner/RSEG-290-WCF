@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using MyWCFServices.RealNorthwindEntities;
 
@@ -9,8 +10,6 @@ namespace MyWCFServices.RealNorthwindDAL
     /// </summary>
     public class CategoryDAO
     {
-        private readonly NorthwindEntities _nwEntities = new NorthwindEntities();
-
         public CategoryEntity GetCategory(int id)
         {
             var cat = InternalGetCategory(id);
@@ -24,10 +23,13 @@ namespace MyWCFServices.RealNorthwindDAL
 
         private Category InternalGetCategory(int id)
         {
-            IQueryable<Category> categories = from c in _nwEntities.Categories
-                                              where c.CategoryID == id
-                                              select c;
-            return categories.SingleOrDefault();
+            using (var nwEntities = new NorthwindEntities())
+            {
+                IQueryable<Category> categories = from c in nwEntities.Categories
+                                                  where c.CategoryID == id
+                                                  select c;
+                return categories.SingleOrDefault(); 
+            }
         }
 
         public bool UpdateCategory(CategoryEntity category)
@@ -37,23 +39,27 @@ namespace MyWCFServices.RealNorthwindDAL
                 throw new ArgumentNullException("category");
             }
 
-            // 2. Retrieve the entity object from database 
-            var cat = InternalGetCategory(category.CategoryID);
-
-            // 1. Test if the passed in entity data object is a valid category in database 
-            if (cat == null)
+            using (var nwEntities = new NorthwindEntities())
             {
-                return false;
+                // 2. Retrieve the entity object from database 
+                var cat = InternalGetCategory(category.CategoryID);
+
+                // 1. Test if the passed in entity data object is a valid category in database 
+                if (cat == null)
+                {
+                    return false;
+                }
+
+                // 3. Update the entity object 
+                cat.CategoryName = category.CategoryName;
+                cat.CategoryID = category.CategoryID;
+                cat.Description = category.Description;
+
+                // 4. Submit the changes to database 
+                int numRows = nwEntities.SaveChanges();
+
+                return (numRows == 1);
             }
-
-            // 3. Update the entity object 
-            cat.CategoryName = category.CategoryName;
-            cat.CategoryID = category.CategoryID;
-
-            // 4. Submit the changes to database 
-            int numRows = _nwEntities.SaveChanges();
-
-            return (numRows == 1);
         }
 
         #region Translation methods
@@ -72,5 +78,23 @@ namespace MyWCFServices.RealNorthwindDAL
         }
 
         #endregion
+    }
+
+    partial class Category
+    {
+        partial void OnCategoryNameChanging(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new NoNullAllowedException("Category name cannot be null.");
+            }
+        }
+        partial void OnDescriptionChanging(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new NoNullAllowedException("Category description cannot be null.");
+            }
+        }
     }
 }

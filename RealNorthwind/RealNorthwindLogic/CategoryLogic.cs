@@ -24,12 +24,12 @@ namespace MyWCFServices.RealNorthwindLogic
             {
                 throw new ArgumentNullException("category");
             }
-
+            /*
             if (string.IsNullOrEmpty(category.Description))
             {
                 throw new NoNullAllowedException(Resources.MSG_NULL_CAT_DESC);
             }
-
+            */
             return _categoryDAO.UpdateCategory(category);
         }
     }
